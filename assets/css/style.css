@@ -555,6 +555,26 @@ a {
   transform: scale(1.03);
 }
 
+/* Responsive multi-column video/image grids */
+.media-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.media-3col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
+}
+
+@media (max-width: 600px) {
+  .media-2col,
+  .media-3col {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Vertical spacer */
 .spacer {
   height: 6vh;
@@ -922,7 +942,6 @@ a {
   }
 
   .project-list-item {
-    flex-wrap: wrap;
     padding: 1.5rem 0;
   }
 
