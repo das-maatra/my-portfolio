@@ -2,7 +2,6 @@
   if (typeof THREE === 'undefined') return;
 
   function initRipple(img) {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     const container = img.parentElement;
 
     // ── Config ────────────────────────────────────────────────
