@@ -342,8 +342,13 @@ const el = renderer.domElement;
     el.addEventListener('pointercancel', () => {
       isOver = false;
       lastX = -1; lastY = -1;
-      _unlockScroll();
+      // Do NOT unlock here — pointercancel is fired by the browser's scroll
+      // system. Unlocking on cancel hands scroll straight back to the browser.
     });
+
+    // touchend fires on finger-lift even after pointercancel, so use it
+    // as the guaranteed cleanup path.
+    el.addEventListener('touchend', () => { _unlockScroll(); }, { passive: true });
 
     // ── Ambient plane waves ───────────────────────────────────
     // Slow waves that drift across the photo so the effect stays alive
