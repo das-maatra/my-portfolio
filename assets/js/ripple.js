@@ -309,27 +309,12 @@ const el = renderer.domElement;
       lastX = -1; lastY = -1;
     });
 
-    el.addEventListener('pointerdown', e => {
-      isOver = true;
-      el.setPointerCapture(e.pointerId);
-      const r = el.getBoundingClientRect();
-      lastX = e.clientX - r.left; lastY = e.clientY - r.top;
-      addDrop(lastX, lastY);
-    });
-
-    el.addEventListener('pointerup', () => {
-      isOver = false;
-      lastX = -1; lastY = -1;
-    });
-
-    // iOS Chrome fires its native scroll recognizer before JS preventDefault.
-    // Body-scroll-lock (CSS position:fixed) is the only reliable workaround.
     let _savedScroll = 0;
     function _lockScroll() {
       _savedScroll = window.scrollY;
       document.body.style.position = 'fixed';
-      document.body.style.top  = -_savedScroll + 'px';
-      document.body.style.left = '0';
+      document.body.style.top   = -_savedScroll + 'px';
+      document.body.style.left  = '0';
       document.body.style.right = '0';
     }
     function _unlockScroll() {
@@ -339,9 +324,26 @@ const el = renderer.domElement;
       document.body.style.right = '';
       window.scrollTo(0, _savedScroll);
     }
-    el.addEventListener('touchstart',  _lockScroll,   { passive: true });
-    el.addEventListener('touchend',    _unlockScroll, { passive: true });
-    el.addEventListener('touchcancel', _unlockScroll, { passive: true });
+
+    el.addEventListener('pointerdown', e => {
+      isOver = true;
+      _lockScroll();
+      const r = el.getBoundingClientRect();
+      lastX = e.clientX - r.left; lastY = e.clientY - r.top;
+      addDrop(lastX, lastY);
+    });
+
+    el.addEventListener('pointerup', () => {
+      isOver = false;
+      lastX = -1; lastY = -1;
+      _unlockScroll();
+    });
+
+    el.addEventListener('pointercancel', () => {
+      isOver = false;
+      lastX = -1; lastY = -1;
+      _unlockScroll();
+    });
 
     // ── Ambient plane waves ───────────────────────────────────
     // Slow waves that drift across the photo so the effect stays alive
