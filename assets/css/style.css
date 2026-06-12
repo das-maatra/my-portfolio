@@ -687,6 +687,10 @@ a {
   touch-action: none;
 }
 
+.about-photo canvas {
+  touch-action: none;
+}
+
 .about-photo img {
   width: 100%;
 }
