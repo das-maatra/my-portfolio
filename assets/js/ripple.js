@@ -309,25 +309,8 @@ const el = renderer.domElement;
       lastX = -1; lastY = -1;
     });
 
-    let _savedScroll = 0;
-    function _lockScroll() {
-      _savedScroll = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top   = -_savedScroll + 'px';
-      document.body.style.left  = '0';
-      document.body.style.right = '0';
-    }
-    function _unlockScroll() {
-      document.body.style.position = '';
-      document.body.style.top   = '';
-      document.body.style.left  = '';
-      document.body.style.right = '';
-      window.scrollTo(0, _savedScroll);
-    }
-
     el.addEventListener('pointerdown', e => {
       isOver = true;
-      _lockScroll();
       const r = el.getBoundingClientRect();
       lastX = e.clientX - r.left; lastY = e.clientY - r.top;
       addDrop(lastX, lastY);
@@ -336,19 +319,18 @@ const el = renderer.domElement;
     el.addEventListener('pointerup', () => {
       isOver = false;
       lastX = -1; lastY = -1;
-      _unlockScroll();
     });
 
     el.addEventListener('pointercancel', () => {
       isOver = false;
       lastX = -1; lastY = -1;
-      // Do NOT unlock here — pointercancel is fired by the browser's scroll
-      // system. Unlocking on cancel hands scroll straight back to the browser.
     });
 
-    // touchend fires on finger-lift even after pointercancel, so use it
-    // as the guaranteed cleanup path.
-    el.addEventListener('touchend', () => { _unlockScroll(); }, { passive: true });
+    // Prevent page scroll while finger is on the canvas.
+    // { passive: false } is required to allow e.preventDefault().
+    // touch-action:none (CSS) handles browsers that respect it; this
+    // handles Chrome iOS which does not.
+    el.addEventListener('touchmove', e => { e.preventDefault(); }, { passive: false });
 
     // ── Ambient plane waves ───────────────────────────────────
     // Slow waves that drift across the photo so the effect stays alive
