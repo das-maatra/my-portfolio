@@ -13,7 +13,7 @@
     // ── Renderer ──────────────────────────────────────────────
     const renderer = new THREE.WebGLRenderer({ antialias: false });
     renderer.setPixelRatio(1);
-    renderer.domElement.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;';
+    renderer.domElement.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;touch-action:none;';
     container.appendChild(renderer.domElement);
 
     let cssW = container.offsetWidth;

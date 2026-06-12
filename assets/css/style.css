@@ -684,6 +684,7 @@ a {
   width: 100%;
   aspect-ratio: 810 / 1217;
   overflow: hidden;
+  touch-action: none;
 }
 
 .about-photo img {
