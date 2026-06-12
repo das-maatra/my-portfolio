@@ -288,46 +288,36 @@
       return [e.clientX - r.left, e.clientY - r.top];
     }
 
-    function getTouch(e) {
-      const r = renderer.domElement.getBoundingClientRect();
-      const t = e.touches[0];
-      return [t.clientX - r.left, t.clientY - r.top];
-    }
+const el = renderer.domElement;
 
-    renderer.domElement.addEventListener('mousemove', e => {
-      const [cx, cy] = getCSS(e);
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      const cx = e.clientX - r.left, cy = e.clientY - r.top;
       if (lastX >= 0 && Math.hypot(cx - lastX, cy - lastY) > MOVE_TH) addDrop(cx, cy);
       lastX = cx; lastY = cy;
     });
 
-    renderer.domElement.addEventListener('mouseenter', e => {
+    el.addEventListener('pointerenter', e => {
       isOver = true;
-      const [cx, cy] = getCSS(e);
-      lastX = cx; lastY = cy;
-      addDrop(cx, cy);
+      const r = el.getBoundingClientRect();
+      lastX = e.clientX - r.left; lastY = e.clientY - r.top;
+      addDrop(lastX, lastY);
     });
 
-    renderer.domElement.addEventListener('mouseleave', () => {
+    el.addEventListener('pointerleave', () => {
       isOver = false;
       lastX = -1; lastY = -1;
     });
 
-    renderer.domElement.addEventListener('touchstart', e => {
-      e.preventDefault();
+    el.addEventListener('pointerdown', e => {
       isOver = true;
-      const [cx, cy] = getTouch(e);
-      lastX = cx; lastY = cy;
-      addDrop(cx, cy);
-    }, { passive: false });
+      el.setPointerCapture(e.pointerId);
+      const r = el.getBoundingClientRect();
+      lastX = e.clientX - r.left; lastY = e.clientY - r.top;
+      addDrop(lastX, lastY);
+    });
 
-    renderer.domElement.addEventListener('touchmove', e => {
-      e.preventDefault();
-      const [cx, cy] = getTouch(e);
-      if (lastX >= 0 && Math.hypot(cx - lastX, cy - lastY) > MOVE_TH) addDrop(cx, cy);
-      lastX = cx; lastY = cy;
-    }, { passive: false });
-
-    renderer.domElement.addEventListener('touchend', () => {
+    el.addEventListener('pointerup', () => {
       isOver = false;
       lastX = -1; lastY = -1;
     });
