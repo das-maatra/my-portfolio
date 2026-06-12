@@ -313,17 +313,19 @@
     });
 
     renderer.domElement.addEventListener('touchstart', e => {
+      e.preventDefault();
       isOver = true;
       const [cx, cy] = getTouch(e);
       lastX = cx; lastY = cy;
       addDrop(cx, cy);
-    });
+    }, { passive: false });
 
     renderer.domElement.addEventListener('touchmove', e => {
+      e.preventDefault();
       const [cx, cy] = getTouch(e);
       if (lastX >= 0 && Math.hypot(cx - lastX, cy - lastY) > MOVE_TH) addDrop(cx, cy);
       lastX = cx; lastY = cy;
-    });
+    }, { passive: false });
 
     renderer.domElement.addEventListener('touchend', () => {
       isOver = false;
