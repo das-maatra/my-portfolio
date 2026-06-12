@@ -322,6 +322,15 @@ const el = renderer.domElement;
       lastX = -1; lastY = -1;
     });
 
+    // Chrome on iOS ignores touch-action:none on the element itself.
+    // A window-level non-passive touchmove is the only reliable fix.
+    let touchOnCanvas = false;
+    el.addEventListener('touchstart', () => { touchOnCanvas = true; },  { passive: true });
+    el.addEventListener('touchend',   () => { touchOnCanvas = false; }, { passive: true });
+    window.addEventListener('touchmove', e => {
+      if (touchOnCanvas) e.preventDefault();
+    }, { passive: false });
+
     // ── Ambient plane waves ───────────────────────────────────
     // Slow waves that drift across the photo so the effect stays alive
     // when the mouse isn't moving. One wave at a time with a random gap.
