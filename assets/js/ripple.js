@@ -322,14 +322,26 @@ const el = renderer.domElement;
       lastX = -1; lastY = -1;
     });
 
-    // Chrome on iOS ignores touch-action:none on the element itself.
-    // A window-level non-passive touchmove is the only reliable fix.
-    let touchOnCanvas = false;
-    el.addEventListener('touchstart', () => { touchOnCanvas = true; },  { passive: true });
-    el.addEventListener('touchend',   () => { touchOnCanvas = false; }, { passive: true });
-    window.addEventListener('touchmove', e => {
-      if (touchOnCanvas) e.preventDefault();
-    }, { passive: false });
+    // iOS Chrome fires its native scroll recognizer before JS preventDefault.
+    // Body-scroll-lock (CSS position:fixed) is the only reliable workaround.
+    let _savedScroll = 0;
+    function _lockScroll() {
+      _savedScroll = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top  = -_savedScroll + 'px';
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+    }
+    function _unlockScroll() {
+      document.body.style.position = '';
+      document.body.style.top   = '';
+      document.body.style.left  = '';
+      document.body.style.right = '';
+      window.scrollTo(0, _savedScroll);
+    }
+    el.addEventListener('touchstart',  _lockScroll,   { passive: true });
+    el.addEventListener('touchend',    _unlockScroll, { passive: true });
+    el.addEventListener('touchcancel', _unlockScroll, { passive: true });
 
     // ── Ambient plane waves ───────────────────────────────────
     // Slow waves that drift across the photo so the effect stays alive
