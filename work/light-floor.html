@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&family=Poppins:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/style.css?v=2">
 </head>
 <body>
 
@@ -43,42 +43,18 @@
       </video>
     </div>
 
-    <!-- DESCRIPTION -->
-    <div class="project-desc">
-      <p>The Light Floor is WNDR Museum's staple attraction at all of its locations. It encapsulates the WNDR experience: multi-sensory works of art that awaken and evolve with human interaction. Visitors dance, explore, and reflect upon the infinity created by mirrors on the walls and floor.</p>
-      <p>For each floor, at different locations, a custom TouchDesigner application was developed to create a unique visual experience. Sensor data from Brightlogic's custom interactive panels was streamed via NDI into TouchDesigner, where a blob-detection algorithm extracted touchpoint positions.</p>
-      <p>These blobs not only drove interaction logic but also generated a stylized visualization that elevated the low-resolution input into a more refined form — colorful particle systems, ice crack simulations, and real-time fluid effects.</p>
-    </div>
-
-    <!-- PROCESS VIDEO GRID -->
-    <div class="spacer"></div>
-    <div class="media-full">
-      <video autoplay muted loop playsinline>
-        <source src="../assets/videos/lightfloor_02.mp4" type="video/mp4">
-      </video>
-    </div>
-
-    <!-- SPLIT: images + text -->
+    <!-- DESCRIPTION + VIDEO -->
     <div class="media-split">
       <div class="media-split-media">
-        <img src="../assets/images/light-floor/blob_detection.png" alt="Blob detection visualization" loading="lazy">
+        <video autoplay muted loop playsinline>
+          <source src="../assets/videos/lightfloor_02.mp4" type="video/mp4">
+        </video>
       </div>
       <div class="media-split-text">
-        <p class="section-label">Sensor Data Pipeline</p>
         <div class="t-body">
-          <p>Sensor data from Brightlogic's custom interactive panels was streamed via NDI into TouchDesigner. A blob-detection algorithm extracted precise touchpoint positions from the raw panel data, converting low-resolution input into high-fidelity interaction coordinates.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="media-split reverse">
-      <div class="media-split-media">
-        <img src="../assets/images/light-floor/blobs_combined.png" alt="Combined blob tracking" loading="lazy">
-      </div>
-      <div class="media-split-text">
-        <p class="section-label">Visual Development</p>
-        <div class="t-body">
-          <p>Several visual iterations were explored during development to experiment with different styles of interaction and texture. Multiple visual prototypes were developed to calibrate color values across PC displays and LED panels, with render resolutions tailored to room dimensions.</p>
+          <p>The Light Floor is WNDR Museum's staple attraction at all of its locations. It encapsulates the WNDR experience: multi-sensory works of art that awaken and evolve with human interaction. Visitors dance, explore, and reflect upon the infinity created by mirrors on the walls and floor.</p>
+          <p>For each floor, at different locations, a custom TouchDesigner application was developed to create a unique visual experience. Sensor data from Brightlogic's custom interactive panels was streamed via NDI into TouchDesigner, where a blob-detection algorithm extracted touchpoint positions.</p>
+          <p>These blobs not only drove interaction logic but also generated a stylized visualization that elevated the low-resolution input into a more refined form — colorful particle systems, ice crack simulations, and real-time fluid effects.</p>
         </div>
       </div>
     </div>
@@ -90,57 +66,66 @@
         <source src="../assets/videos/lightfloor_03.mp4" type="video/mp4">
       </video>
     </div>
+
     <div class="spacer-sm"></div>
     <div class="media-full">
-      <video autoplay muted loop playsinline>
+      <img src="../assets/images/light-floor/blob_detection.png" alt="Blob detection visualization" loading="lazy">
+    </div>
+    <div class="spacer-sm"></div>
+    <div style="width: 60%; margin: 0 auto;">
+      <video autoplay muted loop playsinline style="width: 100%; display: block;">
         <source src="../assets/videos/lightfloor_04.mp4" type="video/mp4">
       </video>
     </div>
 
-    <!-- GIF GRID -->
+    <!-- STACKED SIMULATIONS -->
     <div class="spacer"></div>
-    <div class="media-grid">
-      <div class="media-grid-item">
-        <img src="../assets/images/light-floor/prticles.gif" alt="Particle simulation" loading="lazy">
-      </div>
-      <div class="media-grid-item">
-        <img src="../assets/images/light-floor/cracks.gif" alt="Ice crack simulation" loading="lazy">
-      </div>
-      <div class="media-grid-item">
-        <img src="../assets/images/light-floor/floor_test1.gif" alt="Floor test 1" loading="lazy">
-      </div>
-      <div class="media-grid-item">
-        <img src="../assets/images/light-floor/floor_test2.gif" alt="Floor test 2" loading="lazy">
-      </div>
+    <div style="width: 70%; margin: 0 auto; display: flex; flex-direction: column; gap: 2px;">
+      <video autoplay muted loop playsinline style="width: 100%; display: block;">
+        <source src="../assets/images/light-floor/cracks.mp4" type="video/mp4">
+      </video>
+      <video autoplay muted loop playsinline style="width: 100%; display: block;">
+        <source src="../assets/images/light-floor/prticles.mp4" type="video/mp4">
+      </video>
+      <video autoplay muted loop playsinline style="width: 100%; display: block;">
+        <source src="../assets/images/light-floor/fluid.mp4" type="video/mp4">
+      </video>
     </div>
 
+    <!-- FLOOR TESTS -->
     <div class="spacer-sm"></div>
-    <div class="media-full">
-      <img src="../assets/images/light-floor/fluid.gif" alt="Fluid simulation" loading="lazy">
+    <div class="media-grid" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="media-grid-item">
+        <video autoplay muted loop playsinline>
+          <source src="../assets/images/light-floor/floor_test1.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="media-grid-item">
+        <video autoplay muted loop playsinline>
+          <source src="../assets/images/light-floor/floor_test2.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
 
     <!-- PORTRAIT VIDEOS -->
     <div class="spacer"></div>
-    <div class="media-2col">
-      <div class="media-full">
+    <div class="media-grid" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="media-grid-item">
         <video autoplay muted loop playsinline>
           <source src="../assets/videos/lightfloor_05.mp4" type="video/mp4">
         </video>
       </div>
-      <div class="media-full">
+      <div class="media-grid-item">
         <video autoplay muted loop playsinline>
           <source src="../assets/videos/lightfloor_06.mp4" type="video/mp4">
         </video>
       </div>
-    </div>
-    <div class="spacer-sm"></div>
-    <div class="media-2col">
-      <div class="media-full">
+      <div class="media-grid-item">
         <video autoplay muted loop playsinline>
           <source src="../assets/videos/lightfloor_07.mp4" type="video/mp4">
         </video>
       </div>
-      <div class="media-full">
+      <div class="media-grid-item">
         <video autoplay muted loop playsinline>
           <source src="../assets/videos/lightfloor_08.mp4" type="video/mp4">
         </video>
