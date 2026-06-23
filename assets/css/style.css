@@ -739,6 +739,35 @@ a {
   text-align: right;
 }
 
+.about-connect {
+  margin-top: 4rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
+}
+
+.about-connect-heading {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.about-connect-email {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+
+.about-connect-email:hover {
+  color: var(--text-dim);
+}
+
 /* === 14. PROJECT TILES (desktop) === */
 
 @media (min-width: 901px) {
@@ -954,6 +983,14 @@ a {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+  }
+
+  .about-connect-heading {
+    font-size: 1rem;
+  }
+
+  .about-connect-email {
+    font-size: 0.85rem;
   }
 }
 
